@@ -246,12 +246,6 @@ if [[ ! -z "$db_user" ]]; then
   echo "[*] Creating administrative database user \"$db_user\"."
   mysql -uroot -e "CREATE USER '$db_user'@'%' IDENTIFIED BY '$db_user_password';"
   mysql -uroot -e "GRANT ALL ON *.* TO '$db_user'@'%' WITH GRANT OPTION;"
-
-  wd=$(pwd)
-  credentials_file="$wd/database-credentials.txt"
-
-  echo "$db_user:$db_user_password" > $credentials_file
-  echo "[*] Database user and password have been saved to $credentials_file."
 fi
 
 if [[ "$pma" == true ]]; then
@@ -392,6 +386,14 @@ server {
 EOL
 
   nginx_enable_and_test "$nginx_server_name"
+fi
+
+if [[ ! -z "$db_user" ]]; then
+  wd=$(pwd)
+  credentials_file="$wd/database-credentials.txt"
+
+  echo "$db_user:$db_user_password" > $credentials_file
+  echo "[*] Database user and password have been saved to $credentials_file."
 fi
 
 echo "[*] Script execution finished. Everything should be successfully installed."
