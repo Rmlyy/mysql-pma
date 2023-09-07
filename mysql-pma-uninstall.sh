@@ -18,8 +18,8 @@ echo
 read -s -p "[*] Press enter to continue."
 echo
 
-apt purge '*mysql*' '*mariadb*' '*php*' '*nginx*' '*certbot*' -y
-apt autoremove --purge -y
+DEBIAN_FRONTEND=noninteractive apt purge '*mysql*' '*mariadb*' '*php*' '*nginx*' '*certbot*' -y
+DEBIAN_FRONTEND=noninteractive apt autoremove --purge -y
 rm -rf /opt/pma
 rm -rf /etc/mysql
 rm -rf /etc/php
