@@ -218,17 +218,12 @@ echo "[*] Installation started... Please wait, this may take some time."
 apt update
 
 if [[ "$clean_install" == true ]]; then
-  echo "[*] Clean installation specified, removing old installations."
+  echo "[*] Clean installation specified, running uninstall script."
 
-  apt purge '*mysql*' '*mariadb*' '*php*' '*nginx*' '*certbot*' -y
-  apt autoremove --purge -y
-  rm -rf /opt/pma
-  rm -rf /etc/mysql
-  rm -rf /etc/php
-  rm -rf /etc/letsencrypt
-  rm -rf /var/www
-  rm -rf /var/lib/mysql
-  rm -rf /var/lib/mysql-*
+  apt update
+  apt install curl -y
+
+  curl -s 'https://raw.githubusercontent.com/Rmlyy/mysql-pma/main/mysql-pma-uninstall.sh' | bash
 fi
 
 echo "[*] Installing $db_server server..."
