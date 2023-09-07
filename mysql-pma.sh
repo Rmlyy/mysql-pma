@@ -29,6 +29,13 @@
 # - detect phpMyAdmin latest version and download it, if can't detect it, fallback to hardcoded url
 # - open port with ufw if installed, otherwise with iptables
 
+# Prevent running the script with sh
+# Taken from: https://github.com/Nyr/openvpn-install
+if readlink /proc/$$/exe | grep -q "dash"; then
+	echo "[!] ERROR: This script needs to be run with \"bash\", not \"sh\"."
+	exit 1
+fi
+
 set -e # exit on errors
 
 function nginx_enable_and_test () {

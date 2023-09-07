@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Prevent running the script with sh
+# Taken from: https://github.com/Nyr/openvpn-install
+if readlink /proc/$$/exe | grep -q "dash"; then
+	echo "[!] ERROR: This script needs to be run with \"bash\", not \"sh\"."
+	exit 1
+fi
+
 if [[ "$EUID" -ne 0 ]]; then
   echo "[!] ERROR: This script must be run as root."
   echo "[!] Try running \"sudo su\" and then run the script again."
