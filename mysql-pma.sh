@@ -37,13 +37,13 @@ function nginx_enable_and_test () {
   systemctl restart nginx
 }
 
-if [ "$EUID" -ne 0 ]; then
+if [[ "$EUID" -ne 0 ]]; then
   echo "[!] ERROR: This script must be run as root."
   echo "[!] Try running \"sudo su\" and then run the script again."
   exit 1
 fi
 
-if [ ! $(command -v apt) ]; then
+if [[ ! $(command -v apt) ]]; then
   echo "[!] ERROR: Unsupported operating system."
   echo "[!] This script only supports Debian-based Linux distributions."
   exit 1
