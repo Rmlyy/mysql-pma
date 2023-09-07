@@ -49,6 +49,9 @@ if [ ! $(command -v apt) ]; then
   exit 1
 fi
 
+apt update
+
+echo
 echo "[*] Welcome to Rmly's installation script for MariaDB, MySQL and phpMyAdmin!"
 echo "[*] This script will install a database server of your choice and optionally, phpMyAdmin to easily manage your databases."
 echo
@@ -172,7 +175,6 @@ if [[ "$pma" == true ]]; then
 done
 
   if [[ "$ssl" == "letsencrypt" ]]; then
-    apt update
     apt install curl dnsutils -y
 
     public_ipv4=$(curl -s 'https://1.1.1.1/cdn-cgi/trace' | grep -oP 'ip=\K[^ ]+')
@@ -215,12 +217,10 @@ read -s -p "[*] Press enter to start the installation."
 echo
 
 echo "[*] Installation started... Please wait, this may take some time."
-apt update
 
 if [[ "$clean_install" == true ]]; then
   echo "[*] Clean installation specified, running uninstall script."
 
-  apt update
   apt install curl -y
 
   curl -s 'https://raw.githubusercontent.com/Rmlyy/mysql-pma/main/mysql-pma-uninstall.sh' | bash
