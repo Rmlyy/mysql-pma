@@ -197,8 +197,14 @@ done
     done
 
   elif [[ "$ssl" == "selfsigned" || "$ssl" == false ]]; then
-    while [[ -z "$nginx_server_name" ]]; do
-      read -p "[?] Enter NGINX servername (e.g pma.yourdomain.com) " nginx_server_name
+    while [[ -z "$nginx_server_name_check" ]]; do
+      read -p "[?] Enter NGINX servername (e.g pma.yourdomain.com) (allowed: a-z, 0-9, hyphen, dot, 32 chars max) " nginx_server_name
+
+      if [[ ! "$nginx_server_name" =~ ^[a-z0-9.-]+$ || ${#nginx_server_name} -gt 32 ]]; then
+        echo "[!] Invalid NGINX servername, please enter a valid servername."
+      else
+        nginx_server_name_check=true
+      fi
     done
   fi
 fi
