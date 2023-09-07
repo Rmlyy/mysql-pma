@@ -24,8 +24,8 @@ Any recent Debian-based distribution should work.
 ### Usage
 
 ```sh
-$ wget https://raw.githubusercontent.com/Rmlyy/mysql-pma/main/mysql-pma.sh
-$ sudo bash mysql-pma.sh
+wget https://raw.githubusercontent.com/Rmlyy/mysql-pma/main/mysql-pma.sh
+sudo bash mysql-pma.sh
 ```
 
 Install wget if you don't already have it (`apt install wget -y`)
